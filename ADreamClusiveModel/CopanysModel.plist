@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+
+	<dict>
+		<key>申通</key>
+		<string>shentong</string>
+		<key>EMS</key>
+		<string>ems</string>
+	
+		<key>顺丰</key>
+		<string>shunfeng</string>
+	
+		<key>圆通</key>
+		<string>yuantong</string>
+	
+		<key>中通</key>
+		<string>zhongtong</string>
+	
+		<key>韵达</key>
+		<string>yunda</string>
+	
+		<key>天天</key>
+		<string>tiantian</string>
+	
+		<key>汇通</key>
+		<string>huitongkuaidi</string>
+	
+		<key>全峰</key>
+		<string>quanfengkuaidi</string>
+	
+		<key>德邦</key>
+		<string>debangwuliu</string>
+	
+		<key>宅急送</key>
+		<string>zhaijisong</string>
+	</dict>
+
+</plist>
