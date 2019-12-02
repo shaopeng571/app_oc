@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44DAE6FF2395118100E56B8B /* SLTNullUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DAE6FD2395118000E56B8B /* SLTNullUtil.m */; };
 		44DD1AD42254BD0F00591BB8 /* aip.license in Resources */ = {isa = PBXBuildFile; fileRef = 44DD1AD32254BD0F00591BB8 /* aip.license */; };
 		72063D7C21941F54001BE040 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72063D7B21941F54001BE040 /* AboutViewController.m */; };
 		72063D842194319A001BE040 /* AboutItems.plist in Resources */ = {isa = PBXBuildFile; fileRef = 72063D832194319A001BE040 /* AboutItems.plist */; };
@@ -173,6 +174,8 @@
 
 /* Begin PBXFileReference section */
 		3EA4501723FB2AE62327B42B /* libPods-ADreamClusiveModel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ADreamClusiveModel.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44DAE6FD2395118000E56B8B /* SLTNullUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLTNullUtil.m; sourceTree = "<group>"; };
+		44DAE6FE2395118100E56B8B /* SLTNullUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLTNullUtil.h; sourceTree = "<group>"; };
 		44DD1AD32254BD0F00591BB8 /* aip.license */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = aip.license; sourceTree = "<group>"; };
 		5A76B9832200572F0091CC63 /* ADreamClusive.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ADreamClusive.entitlements; sourceTree = "<group>"; };
 		72063D7A21941F54001BE040 /* AboutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
@@ -728,6 +731,8 @@
 				72DF9674218014E5008B0EA5 /* ZLDeviceUtils.m */,
 				72DF9667218014E5008B0EA5 /* ZLCheckNullUtils.h */,
 				72DF9675218014E5008B0EA5 /* ZLCheckNullUtils.m */,
+				44DAE6FE2395118100E56B8B /* SLTNullUtil.h */,
+				44DAE6FD2395118000E56B8B /* SLTNullUtil.m */,
 				72DF9676218014E5008B0EA5 /* UntilMd5 */,
 				72CF8BC7218807420062FE33 /* ZLFMDBHelper.h */,
 				72CF8BC8218807420062FE33 /* ZLFMDBHelper.m */,
@@ -1144,6 +1149,7 @@
 				72DF96D1218014E5008B0EA5 /* ZLTabBarController.m in Sources */,
 				72DF96B8218014E5008B0EA5 /* ZLCheckDataTool.m in Sources */,
 				72DF96BD218014E5008B0EA5 /* ZLCheckNullUtils.m in Sources */,
+				44DAE6FF2395118100E56B8B /* SLTNullUtil.m in Sources */,
 				72CB26B3219D2371002842C4 /* UIView+Shape.m in Sources */,
 				72CF8BCC218997D50062FE33 /* ProductListViewController.m in Sources */,
 				7285071C2182AD67002CEE0C /* UILabel+Alignment.m in Sources */,
