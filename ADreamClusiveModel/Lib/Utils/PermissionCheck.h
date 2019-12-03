@@ -27,7 +27,7 @@
                          withNoPermission:(void (^)(void))noPermission;
 
 /**定位权限*/
-+ (void)checkLocationServiceAuthorization:(void(^)(BOOL authorizationAllow))checkFinishBack;
++ (void)checkLocationServiceAuthorization:(void(^)(BOOL authorizationAllow, CLAuthorizationStatus status))checkFinishBack;
 
 /**麦克风权限*/
 + (void)checkAudioAuthorizationGrand:(void (^)(void))permissionGranted

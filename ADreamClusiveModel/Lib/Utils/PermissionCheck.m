@@ -196,7 +196,7 @@
 }
 
 /**定位权限*/
-+ (void)checkLocationServiceAuthorization:(void(^)(BOOL authorizationAllow))checkFinishBack
++ (void)checkLocationServiceAuthorization:(void(^)(BOOL authorizationAllow, CLAuthorizationStatus status))checkFinishBack
 {
     if ([CLLocationManager locationServicesEnabled])
     {
@@ -205,12 +205,12 @@
         switch (status) {
             case kCLAuthorizationStatusNotDetermined:
                 if (checkFinishBack) {
-                    checkFinishBack(NO);
+                    checkFinishBack(NO, status);
                 }
                 break;
             case kCLAuthorizationStatusRestricted:
                 if (checkFinishBack) {
-                    checkFinishBack(NO);
+                    checkFinishBack(NO, status);
                 }
                 break;
             case kCLAuthorizationStatusDenied:
@@ -218,12 +218,12 @@
                 break;
             case kCLAuthorizationStatusAuthorizedAlways:
                 if (checkFinishBack) {
-                    checkFinishBack(YES);
+                    checkFinishBack(YES, status);
                 }
                 break;
             case kCLAuthorizationStatusAuthorizedWhenInUse:
                 if (checkFinishBack) {
-                    checkFinishBack(YES);
+                    checkFinishBack(YES, status);
                 }
                 break;
             default:

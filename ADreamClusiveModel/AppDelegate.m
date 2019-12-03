@@ -13,8 +13,15 @@
 #import "ZLUncaughtExceptionHandler.h"
 #import "ZLCrashHandler.h"
 #import "ZLTabBarController.h"
-@interface AppDelegate () <BuglyDelegate>
 
+#define mApplication        [UIApplication sharedApplication]
+#define mNotificationCenter [NSNotificationCenter defaultCenter]
+
+@interface AppDelegate () <BuglyDelegate, CLLocationManagerDelegate>
+
+@property (nonatomic, unsafe_unretained) UIBackgroundTaskIdentifier backgroundTaskIdentifier;
+@property (nonatomic, strong) NSTimer       *pollTimer;
+@property (nonatomic, assign) NSInteger     pollCountTimer;
 @end
 
 @implementation AppDelegate
@@ -22,9 +29,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [LocationManager sharedInstance];
+    
     [self setIQKeyBoardManager];
     
-//    [[UINavigationBar appearance] setBarTintColor:kRGB(37*0.5, 23*0.5, 21*0.5)];
+    //    [[UINavigationBar appearance] setBarTintColor:kRGB(37*0.5, 23*0.5, 21*0.5)];
     
     self.window= [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.rootViewController = [[ZLTabBarController alloc] init];
@@ -47,12 +56,54 @@
     
     [ZLCrashHandler uploadCrashLog];
     
-//    @throw [NSException exceptionWithName:@"newException" reason:@"主动抛出异常" userInfo:@{}];
-    
+    //    @throw [NSException exceptionWithName:@"newException" reason:@"主动抛出异常" userInfo:@{}];
+    [mNotificationCenter addObserver:self selector:@selector(handleBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+    [mNotificationCenter addObserver:self selector:@selector(handleEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     return YES;
 }
-    
 
+- (void)handleBecomeActive:(NSNotification *)notification {
+    
+    //    [mApplication endBackgroundTask:self.backgroundTaskIdentifier];
+    //    self.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+}
+
+- (void)handleEnterBackground:(NSNotification *)notification {
+    
+    self.backgroundTaskIdentifier = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^(void) {
+        [mApplication endBackgroundTask:self.backgroundTaskIdentifier];
+        self.backgroundTaskIdentifier = UIBackgroundTaskInvalid;
+    }];
+    NSLog(@"remaining back ground time %f",[[UIApplication sharedApplication] backgroundTimeRemaining]);
+    [self startPoll];
+}
+
+- (void)startPoll {
+    
+    [self stopPoll];
+    
+    _pollTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(pollAction:) userInfo:nil repeats:YES];
+}
+
+- (void)stopPoll {
+    
+    if (_pollTimer && [_pollTimer isValid]) {
+        [_pollTimer invalidate];
+        _pollTimer = nil;
+    }
+    self.pollCountTimer = 0;
+}
+
+- (void)pollAction:(NSTimer *)timer {
+    
+    self.pollCountTimer += 1;
+    NSLog(@"后台任务进行中......%ld", self.pollCountTimer);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations
+{
+    
+}
 
 #pragma mark - Private
 - (void)p_configureForBugly {

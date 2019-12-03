@@ -176,12 +176,18 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>访问相机哦</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>请允许使用你的地理位置，以便正常配送</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>请允许应用一直使用您的位置信息</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>当使用时，请允许应用使用您的位置信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许使用您的相册</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>location</string>
+	</array>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>

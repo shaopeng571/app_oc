@@ -35,7 +35,7 @@ static NSString *const LATEST_POSITION_KEY = @"latestpositionkey";
 }
 - (id)init{
     if (self = [super init]) {
-        
+        [self getLocation];
     }
     return self;
 }
@@ -89,14 +89,35 @@ static NSString *const LATEST_POSITION_KEY = @"latestpositionkey";
     if ([CLLocationManager locationServicesEnabled]) {
         locationmanager = [[CLLocationManager alloc]init];
         locationmanager.delegate = self;
-        [locationmanager requestAlwaysAuthorization];
         currentCity = [NSString new];
-        [locationmanager requestWhenInUseAuthorization];
+        [locationmanager requestAlwaysAuthorization];
+//        [locationmanager requestWhenInUseAuthorization];
         
         //设置寻址精度
         locationmanager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationmanager.distanceFilter = 5.0;
+        locationmanager.distanceFilter = kCLDistanceFilterNone;
         [locationmanager startUpdatingLocation];
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status
+{
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+        case kCLAuthorizationStatusRestricted:
+        case kCLAuthorizationStatusDenied:
+            [manager requestAlwaysAuthorization];
+//            [manager requestWhenInUseAuthorization];
+            break;
+        case kCLAuthorizationStatusAuthorizedAlways:
+            manager.allowsBackgroundLocationUpdates = YES;
+            break;
+        case kCLAuthorizationStatusAuthorizedWhenInUse:
+            [manager requestAlwaysAuthorization];
+            manager.allowsBackgroundLocationUpdates = YES;
+            break;
+        default:
+            break;
     }
 }
 
@@ -125,7 +146,6 @@ static NSString *const LATEST_POSITION_KEY = @"latestpositionkey";
     NSLog(@"%f,%f",currentLocation.coordinate.latitude,currentLocation.coordinate.longitude);
     
     [self setLatestLocation:currentLocation];
-    
     
     //反地理编码
     [geoCoder reverseGeocodeLocation:currentLocation completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
